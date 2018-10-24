@@ -60,5 +60,5 @@ declare module 'leaflet' {
         constructor(paths: Polyline | Polygon | LatLngExpression[] | Polyline[] | Polygon[] | LatLngExpression[][], options?: PolylineDecoratorOptions);
     }
 
-    function polylineDecorator(paths: Polyline | Polyline[], options?: PolylineDecoratorOptions): PolylineDecorator;
+    function polylineDecorator(paths: Polyline | Polygon | Polyline[] | Polygon[] | LatLng[], options?: PolylineDecoratorOptions): PolylineDecorator;
 }
