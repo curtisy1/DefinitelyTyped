@@ -150,7 +150,7 @@ declare module 'packery' {
          * @param  {Element} element [description]
          * @return {Packery}         [description]
          */
-        data(element: Element): Packery;
+        static data(element: Element): Packery;
 
         /**
          * [destroy Removes the Packery functionality completely. This will return the element back to its pre-initialized state]
