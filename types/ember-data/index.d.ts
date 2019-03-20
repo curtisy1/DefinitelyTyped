@@ -543,8 +543,9 @@ export namespace DS {
          * invoking the callback with the name of each relationship and its relationship
          * descriptor.
          */
-        eachRelationship(
-            callback: (name: string, details: RelationshipMeta<this>) => void,
+        eachRelationship<T extends Model>(
+            this: T,
+            callback: (name: string, details: RelationshipMeta<T>) => void,
             binding?: any
         ): any;
         /**
@@ -901,8 +902,8 @@ export namespace DS {
      * it easy to create data bindings with the `PromiseObject` that will
      * be updated when the promise resolves.
      */
-    interface PromiseObject<T>
-        extends ObjectProxy,
+    interface PromiseObject<T extends object>
+        extends ObjectProxy<T>,
             PromiseProxyMixin<T & ObjectProxy> {}
     class PromiseObject<T> {}
     /**
@@ -1132,7 +1133,7 @@ export namespace DS {
          * This method unloads all records in the store.
          * It schedules unloading to happen during the next run loop.
          */
-        unloadAll<K extends keyof ModelRegistry>(modelName: K): void;
+        unloadAll<K extends keyof ModelRegistry>(modelName?: K): void;
         /**
          * DEPRECATED:
          * This method has been deprecated and is an alias for store.hasRecordForId, which should

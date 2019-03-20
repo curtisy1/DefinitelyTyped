@@ -907,7 +907,9 @@ export interface DirectionsRoute {
      * contains a single `points` object that holds an encoded polyline representation of the route.
      * This polyline is an approximate (smoothed) path of the resulting directions.
      */
-    overview_polyline: string;
+    overview_polyline: {
+        points: string;
+    };
     /** contains the viewport bounding box of the `overview_polyline`. */
     bounds: LatLngBounds;
     /** contains the copyrights text to be displayed for this route. You must handle and display this information yourself. */
@@ -2005,7 +2007,7 @@ export interface GeocodingResponse<STATUSES = GeocodingResponseStatus> {
      * When the geocoder returns a status code other than `OK`, there may be an additional `error_message` field
      * within the Geocoding response object. This field contains more detailed information about the reasons behind the given status code.
      */
-    error_meesage: string;
+    error_message: string;
     /**
      * contains an array of geocoded address information and geometry information.
      *
@@ -2402,8 +2404,35 @@ export interface PlaceDetailsRequest {
      * parameter from a request, ALL possible fields will be returned, and you will be billed accordingly.
      * This applies only to Place Details requests.
      */
-    fields?: Array<keyof PlaceDetailsResult>;
+    fields?: PlaceDetailsRequestField[];
 }
+
+export type PlaceDetailsRequestField = (
+    "address_component" |
+    "adr_address" |
+    "alt_id" |
+    "formatted_address" |
+    "geometry" |
+    "icon" |
+    "id" |
+    "name" |
+    "permanently_closed" |
+    "photo" |
+    "place_id" |
+    "plus_code" |
+    "scope" |
+    "type" |
+    "url" |
+    "user_ratings_total" |
+    "utc_offset" |
+    "vicinity" |
+    "formatted_phone_number" |
+    "international_phone_number" |
+    "opening_hours" |
+    "website" |
+    "price_level" |
+    "rating" |
+    "review");
 
 export interface PlaceDetailsResponse {
     /** contains metadata on the request. */
@@ -3105,7 +3134,7 @@ export interface QueryAutocompleteResult {
      * contains an `offset` value and a `length`.
      * These describe the location of the entered term in the prediction result text, so that the term can be highlighted if desired.
      */
-    matched_substring: PredictionSubstring[];
+    matched_substrings: PredictionSubstring[];
 }
 
 /** A Radar Search request must include at least one of `keyword`, `name`, or `type`. */
